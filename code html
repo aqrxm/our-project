@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Événements</title>
+
+    <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+
+    <h1>Gestion des Événements</h1>
+
+    <!-- Formulaire -->
+    <form id="eventForm">
+        <!-- Champ caché pour la modification -->
+        <input type="hidden" id="eventId">
+
+        <label>Titre de l'événement</label>
+        <input type="text" id="title" placeholder="Ex: Conférence Web">
+
+        <label>Date</label>
+        <input type="date" id="date">
+
+        <label>Lieu</label>
+        <input type="text" id="location" placeholder="Ex: Salle A">
+
+        <label>Description</label>
+        <textarea id="description" placeholder="Description de l'événement"></textarea>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <!-- Tableau des événements -->
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Lieu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="eventTable">
+            <!-- Les événements seront affichés ici -->
+        </tbody>
+    </table>
+
+    <!-- Lien vers le fichier JavaScript -->
+    <script src="exe.js"></script>
+
+</body>
+</html>
