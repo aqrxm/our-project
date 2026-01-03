@@ -1,0 +1,68 @@
+let events = JSON.parse(localStorage.getItem("events")) || [];
+
+const form = document.getElementById("eventForm");
+const table = document.getElementById("eventTable");
+
+function displayEvents() {
+  table.innerHTML = "";
+  events.forEach((event, index) => {
+    table.innerHTML += `
+      <tr>
+        <td>${event.title}</td>
+        <td>${event.date}</td>
+        <td>${event.location}</td>
+        <td>
+          <button class="action" onclick="editEvent(${index})">✏️</button>
+          <button class="action" onclick="deleteEvent(${index})">🗑️</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const id = document.getElementById("eventId").value;
+  const title = document.getElementById("title").value;
+  const date = document.getElementById("date").value;
+  const location = document.getElementById("location").value;
+  const description = document.getElementById("description").value;
+
+  if (!title || !date || !location) {
+    alert("Veuillez remplir tous les champs !");
+    return;
+  }
+
+  const eventData = { title, date, location, description };
+
+  if (id === "") {
+    events.push(eventData); // CREATE
+  } else {
+    events[id] = eventData; // UPDATE
+  }
+
+  localStorage.setItem("events", JSON.stringify(events));
+  form.reset();
+  document.getElementById("eventId").value = "";
+  displayEvents();
+});
+
+function editEvent(index) {
+  const event = events[index];
+  document.getElementById("eventId").value = index;
+  document.getElementById("title").value = event.title;
+  document.getElementById("date").value = event.date;
+  document.getElementById("location").value = event.location;
+  document.getElementById("description").value = event.description;
+}
+
+function deleteEvent(index) {
+  if (confirm("Supprimer cet événement ?")) {
+    events.splice(index, 1);
+    localStorage.setItem("events", JSON.stringify(events));
+    displayEvents();
+  }
+}
+
+displayEvents();
